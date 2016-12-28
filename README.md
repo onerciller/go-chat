@@ -10,7 +10,7 @@ simple chat application that it was made with go
   $ go run main.go  
 ```  
   
-![screenshot](https://github.com/onerciller/go-chat/blob/master/img/chat.png)
+![screenshot](https://github.com/onerciller/go-chat/blob/master/img/chat.png?style=centerme)
 
 
 
