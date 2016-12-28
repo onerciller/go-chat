@@ -3,7 +3,7 @@ simple chat application that it was made with go
 
 ##Installation
 
-'''sh 
+  ```sh 
   $ git clone https://github.com/onerciller/go-chat
   $ cd /go-chat
   $ go run main.go
