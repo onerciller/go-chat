@@ -21,6 +21,7 @@ var upgrader = websocket.Upgrader{
 type Message struct {
 	Username string
 	Message  string
+	Login	 bool
 }
 
 func main() {

@@ -10,6 +10,6 @@
     padding-left: 10px;    
 }
 
-.panel-body { padding: 0px; }
+.panel-body { padding: 0px !important;}
 
-.panel-heading { background-color: #3d6da7 !important; color: white !important; }
+.panel-heading { background-color: #3d6da7 !important; color: white !important; margin-bottom: 20px;}
