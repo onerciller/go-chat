@@ -7,13 +7,11 @@ var messages;
 
 $("#login-btn").on("click" , function(){
 
-	username_val = $("#username").val();
-	
+	username_val = $( $.parseHTML($("#username").val()) ).text()
 
 	if(username_val != ""){
-	localStorage.setItem('username',username_val);
-    window.location.reload()
-
+		localStorage.setItem('username',username_val);
+	    window.location.reload()
 	}else{
 		alert("you should required fields ");
 	}
@@ -32,27 +30,44 @@ $(function () {
     username = localStorage.getItem("username");
 
 
+
+
 	ws = new WebSocket("ws://localhost:8000/ws");
-	   ws.onopen = function(e) {
-		$("#sendBtn").click(function () {
-			 ws.send(
-		                    JSON.stringify({
-		                        username:username,
-		                        message:  messageTxt.val()
-		                    }
-		                )); 
+	   	ws.onopen = function(e) {
+			$("#sendBtn").click(function () {
+				if (messageTxt.val() != "") {
+				 	ws.send(
+	                    JSON.stringify({
+	                        username:username,
+	                        message:  $( $.parseHTML(messageTxt.val()) ).text(),
+	                    }
+			        ));
+					messageTxt.val("");
+				}else{
+					alert('Enter some value');
+				}
+			});
+			if(username != null){
+				ws.send(
+			        JSON.stringify({
+			            username:username,
+			            login: true
+			        }
+			    ));        
+			}
+		}
 
-				messageTxt.val("");
-			});          
-}
 
 
-
-//get messages
- ws.addEventListener("message", function(event) {
-        const msg = JSON.parse(event.data)
-       appendMessage($("<div class='row message-bubble'>"+ "<p class='text-muted'>"+msg.Username +" </p>" + "<b>" + msg.Message + "</b>" + "</div>"));
-});
+	//get messages
+	 ws.addEventListener("message", function(event) {
+	       	const msg = JSON.parse(event.data)
+	       	if(msg.Login != true){
+	       		appendMessage($("<div class='message-bubble'>"+ "<p class='text-muted'>"+msg.Username +" </p>" + "<b>" + msg.Message + "</b>" + "</div>"));
+	       	}else{
+	       		$('#Peopleonline').append('<li class="list-group-item" id="'+msg.Username+'">'+msg.Username+'</li>')
+	       	}
+	});
 
 });
 
