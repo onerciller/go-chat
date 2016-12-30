@@ -47,7 +47,6 @@ $(function () {
 					alert('Enter some value');
 				}
 			});
-			console.log(username);
 			if(username != null){
 				ws.send(
 			        JSON.stringify({
