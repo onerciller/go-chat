@@ -59,13 +59,17 @@ $(function () {
 
 
 
+
+   
 	//get messages
 	 ws.addEventListener("message", function(event) {
 	       	const msg = JSON.parse(event.data)
+
+	       	$onlineIcon = "<span style='color:#00B16A;font-size:11px;'><i class='fa fa-circle' aria-hidden='true'></i></span>";
 	       	if(msg.Login != true){
 	       		appendMessage($("<div class='message-bubble'>"+ "<p class='text-muted'>"+msg.Username +" </p>" + "<b>" + msg.Message + "</b>" + "</div>"));
 	       	}else{
-	       		$('#Peopleonline').append('<li class="list-group-item" id="'+msg.Username+'">'+msg.Username+'</li>')
+	       		$('#Peopleonline').append('<li class="list-group-item" id="'+msg.Username+'">'+ $onlineIcon+" "+msg.Username+'</li>')
 	       	}
 	});
 
